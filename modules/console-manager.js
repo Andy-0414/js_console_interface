@@ -20,6 +20,14 @@ module.exports = {
         })
     },
 
+    _writeTable(startPointX, startPointY, endPointX, endPointY, chkCallBack) {
+        for (var i = startPointY; i < endPointY; i++) {
+            for (var j = startPointX; j < endPointX; j++) {
+                chkCallBack(j, i)
+            }
+        }
+    },
+
     createDot(str, x, y) {
         this.consoleTable[y][x] = str
     },
@@ -30,11 +38,9 @@ module.exports = {
         sizeY = parseInt(sizeY)
         switch (mode) {
             case "normal":
-                for (var i = y; i < y + sizeY; i++) {
-                    for (var j = x; j < x + sizeX; j++) {
-                        this.consoleTable[i][j] = "□"
-                    }
-                }
+                this._writeTable(x,y,x + sizeX,y+sizeY,(x, y) => {
+                    this.consoleTable[y][x] = "□"
+                })
                 break;
         }
     },
