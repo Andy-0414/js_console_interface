@@ -39,6 +39,7 @@ module.exports = {
         }
     },
     clear() {
+        this.consoleTable = []
         for (var i = 0; i < this.getScreenY(); i++) {
             var arr = []
             for (var j = 0; j < this.getScreenX(); j++)
