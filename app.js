@@ -1,9 +1,12 @@
-const cm = require('./modules/console-manager')
+const ConsoleManager = require('./modules/console-manager')
 
+const Vector = require('./model/Vector')
+const Line  = require('./model/Line')
+
+const cm = new ConsoleManager()
 cm.init()
 cm.setOnKeyPressEvent((str,key)=>{
     cm.clear()
-    cm.createBox("normal", 0, 0, str, str)
-    cm.createBox("normal", str, str, str, str)
+    cm.createDot("□",new Vector(str,str))
     cm.render()
 })
