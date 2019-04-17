@@ -29,7 +29,7 @@ module.exports = class ConsoleManager{
         }
     }
     createDot(str,vector) {
-        this.consoleTable[vector.getX()][vector.getY()] = str
+        this.consoleTable[vector.getY()][vector.getX()] = str
     }
     // createBox(mode = "normal", x, y, sizeX, sizeY) {
     //     x = parseInt(x)
