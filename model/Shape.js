@@ -18,8 +18,14 @@ class Shape {
         _y && this.position.setY(_y)
     }
     setSize(_x,_y){
-        _x && this.size.setX(_x)
-        _y && this.size.setY(_y)
+        this.size.setX(_x)
+        this.size.setY(_y)
+    }
+    setSizeX(_x) {
+        this.size.setX(_x)
+    }
+    setSizeY(_y) {
+        this.size.setY(_y)
     }
 }
 class Polygon extends Shape {

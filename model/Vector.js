@@ -3,17 +3,28 @@ module.exports = class Vector {
         this.x = _x;
         this.y = _y
     }
+    _numberValidity(num,callback){
+        if(num && typeof num == "number") callback()
+    }
     setX(_x) {
-        this.x = _x
+        this._numberValidity(_x,()=>{
+            this.x = _x
+        })
     }
     setY(_y) {
-        this.y = _y
+        this._numberValidity(_y, () => {
+            this.y = _y
+        })
     }
     moveX(_x) {
-        this.x += _x
+        this._numberValidity(_x, () => {
+            this.x += _x
+        })
     }
     moveY(_y) {
-        this.y += _y
+        this._numberValidity(_y, () => {
+            this.y += _y
+        })
     }
     getX() {
         return this.x
