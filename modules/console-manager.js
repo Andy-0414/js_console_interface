@@ -1,6 +1,7 @@
 const readline = require('readline');
-module.exports = class ConsoleManager{
-    constructor(){
+const Vector = require('../model/Vector');
+module.exports = class ConsoleManager {
+    constructor() {
         this.consoleTable = []
     }
     getScreenX() {
@@ -21,29 +22,22 @@ module.exports = class ConsoleManager{
             keyEventCallBack(str, key)
         })
     }
-    _writeArea(startPointX, startPointY, endPointX, endPointY, chkCallBack) {
-        for (var i = startPointY; i < endPointY; i++) {
-            for (var j = startPointX; j < endPointX; j++) {
+    _writeArea(startPosition,size, chkCallBack) {
+        for (var i = startPosition.getY(); i < size.getY(); i++) {
+            for (var j = startPosition.getX(); j < size.getX(); j++) {
                 chkCallBack(j, i)
             }
         }
     }
-    createDot(str,vector) {
+    createDot(str, vector) {
         this.consoleTable[vector.getY()][vector.getX()] = str
     }
-    // createBox(mode = "normal", x, y, sizeX, sizeY) {
-    //     x = parseInt(x)
-    //     y = parseInt(y)
-    //     sizeX = parseInt(sizeX)
-    //     sizeY = parseInt(sizeY)
-    //     switch (mode) {
-    //         case "normal":
-    //             this._writeArea(x,y,x + sizeX,y+sizeY,(x, y) => {
-    //                 this.consoleTable[y][x] = "□"
-    //             })
-    //             break;
-    //     }
-    // }
+    createShape(shape) {
+        var prop = shape.getShape()
+        this._writeArea(shape.getPosition(),shape.getSize(), (x, y) => {
+            if (prop[y][x]) this.createDot(prop[y][x], new Vector(x, y))
+        })
+    }
     clear() {
         this.consoleTable = []
         for (var i = 0; i < this.getScreenY(); i++) {
