@@ -23,6 +23,12 @@ class Shape {
     setY(_y){
         this.position.setY(_y)
     }
+    moveX(_x){
+        this.position.moveX(_x)
+    }
+    moveY(_y){
+        this.position.moveY(_y)
+    }
 
     setSize(_x,_y){
         this.size.setX(_x)
@@ -36,6 +42,7 @@ class Shape {
     }
 
     getShape() {
+        
     }
 }
 class Polygon extends Shape {
