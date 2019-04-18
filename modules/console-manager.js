@@ -3,6 +3,7 @@ const Vector = require('../model/Vector');
 module.exports = class ConsoleManager {
     constructor() {
         this.consoleTable = []
+        this.space = "　"
     }
     getScreenX() {
         return process.stdout.columns / 2 - 1
@@ -22,20 +23,15 @@ module.exports = class ConsoleManager {
             keyEventCallBack(str, key)
         })
     }
-    _writeArea(startPosition,size, chkCallBack) {
-        for (var i = startPosition.getY(); i < size.getY(); i++) {
-            for (var j = startPosition.getX(); j < size.getX(); j++) {
-                chkCallBack(j, i)
-            }
-        }
-    }
     createDot(str, vector) {
         this.consoleTable[vector.getY()][vector.getX()] = str
     }
     createShape(shape) {
         var prop = shape.getShape()
-        this._writeArea(shape.getPosition(),shape.getSize(), (x, y) => {
-            if (prop[y][x]) this.createDot(prop[y][x], new Vector(x, y))
+        prop.forEach((y,idxY)=>{
+            y.forEach((x,idxX)=>{
+                this.consoleTable[idxY+shape.getPosition().getY()][idxX+shape.getPosition().getX()] = x || this.space
+            })
         })
     }
     clear() {
@@ -43,7 +39,7 @@ module.exports = class ConsoleManager {
         for (var i = 0; i < this.getScreenY(); i++) {
             var arr = []
             for (var j = 0; j < this.getScreenX(); j++)
-                arr.push("■")
+                arr.push(this.space)
             this.consoleTable.push(arr)
         }
     }

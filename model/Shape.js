@@ -1,9 +1,8 @@
 const Vector = require('./Vector')
 
 class Shape {
-    constructor(str) {
+    constructor() {
         this.position = new Vector(0, 0)
-        this.str = str || "□"
 
         this.size = new Vector(0,0)
     }
@@ -13,10 +12,18 @@ class Shape {
     getSize(){
         return this.size
     }
+
     setPosition(_x, _y) {
-        _x && this.position.setX(_x)
-        _y && this.position.setY(_y)
+        this.position.setX(_x)
+        this.position.setY(_y)
     }
+    setX(_x){
+        this.position.setX(_x)
+    }
+    setY(_y){
+        this.position.setY(_y)
+    }
+
     setSize(_x,_y){
         this.size.setX(_x)
         this.size.setY(_y)
@@ -27,15 +34,33 @@ class Shape {
     setSizeY(_y) {
         this.size.setY(_y)
     }
+
+    getShape() {
+    }
 }
 class Polygon extends Shape {
-
+    constructor(shape){
+        super()
+        this.shape = shape || []
+    }
+    setShape(shape){
+        if(shape) this.shape = shape
+    }
+    getSize(){
+        return new Vector(this.shape[0].length,this.shape.length)
+    }
+    getShape(){
+        super.getShape()
+        return this.shape
+    }
 }
 class Box extends Shape {
-    constructor() {
+    constructor(str) {
         super()
+        this.str = str || "□"
     }
     getShape() {
+        super.getShape()
         var arr = []
         for (var i = 0; i < this.size.getY(); i++) {
             arr.push([])
